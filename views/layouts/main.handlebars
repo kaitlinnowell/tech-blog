@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registry</title>
+  <link rel="stylesheet" href="/css/jass.css">
+</head>
+
+<body>
+  <div class="bg-dark">
+    <header class="display-flex justify-space-between align-center p-2">
+    <nav>
+      <button class="btn" id="home">Home</button>
+      <button class="btn" id="dashboard">Dashboard</button>
+      {{#if logged_in}}
+          <button class="btn" id="logout">logout</button>
+      {{else}}
+          <button class="btn" id="login">login</button>
+      {{/if}}
+    </nav>
+    </header>
+    <h1 class="text-white p-2">
+      {{page_title}}
+    </h1>
+    </div>
+
+  <main class="container container-fluid mt-5">
+    {{{ body }}}
+  </main>
+  <footer>
+      
+  </footer>
+
+  {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+  {{else}}
+    <script src="/js/login.js"></script>
+  {{/if}}
+</body>
