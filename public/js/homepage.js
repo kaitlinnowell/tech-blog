@@ -1,9 +1,27 @@
-const loadComments = (event) => {
-  const linkText = `/comments/:${this.data.postId}`
-  console.log(linkText)
-    document.location.replace(linkText)
-}
+const addComments = async (event) => {
+  event.preventDefault();
+  
+  //Get user input values
+  const text = document.querySelector('#comment-text').value.trim();
+  const queryString = window.location.href;
+  const splitString = queryString.split('/')
+  const postId = splitString[splitString.length -1]
+  console.log(postId);
+  if (text) {
+    // Call the signup route with the user input provided
+    const response = await fetch('/api/comments/add', {
+      method: 'POST',
+      body: JSON.stringify({ text: text, post_id: postId }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    console.log(response.ok)
+    if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert('Failed to log in');
+    }
+  }
+};
 
-document
-    .querySelector('.post')
-    .addEventListener('click',  loadComments);
+
+document.querySelector('#add-comment').addEventListener('click', addComments);

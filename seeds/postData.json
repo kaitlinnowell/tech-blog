@@ -1,7 +1,7 @@
 [
   {
     "title": "Why MVC is so important",
-    "text": "MVC allows developers to maintain a true separation of concers, devising their code between the Model later for data, the View later for design, and the Controller later for application logic."
+    "text": "MVC allows developers to maintain a true separation of concerns, devising their code between the Model later for data, the View later for design, and the Controller later for application logic."
   },
   {
     "title": "Authentication vs. Authorization",

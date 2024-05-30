@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 //Check credentials with withAth
@@ -16,9 +16,36 @@ router.get('/', withAuth, async (req, res) => {
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
+    console.log(posts);
 
     res.render('homepage', {
       posts,
+      logged_in: req.session?.logged_in,
+      page_title: 'The Tech Blog'
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/dashboard', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+      // order: [['date_created', 'ASC']],
+    });
+
+    const posts = postData.map((post) => post.get({ plain: true }));
+    console.log(posts);
+
+    res.render('dashboard', {
+      posts,
+      current_user_id: req.session.user_id,
       logged_in: req.session?.logged_in,
       page_title: 'The Tech Blog'
     });
@@ -37,12 +64,19 @@ router.get('/comments/:id', withAuth, async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['date_created', 'text' ]
+          attributes: ['date_created', 'text' ],
+          include: [
+            {
+              model: User,
+              attributes: ['name'],
+            }
+          ]
         }
       ],
     });
 
     const post = postData.get({ plain: true });
+    console.log(postData.comments);
 
     res.render('comments', {
       ...post,

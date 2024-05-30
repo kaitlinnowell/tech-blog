@@ -1,5 +1,6 @@
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
+const moment = require('moment')
 
 class Comment extends Model {};
 
@@ -11,9 +12,9 @@ Comment.init({
         autoIncrement: true,
       },
     date_created: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
+        defaultValue: moment().format("M/D/YYYY"),
     },
     text: {
         type: DataTypes.STRING,

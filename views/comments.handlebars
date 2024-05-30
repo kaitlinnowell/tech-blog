@@ -1,18 +1,27 @@
 
 <div class="row align-center mb-5">
-  <div class="col-md-6 col-lg-10 card" data-postId={{post.id}}>
+  <div class="col-md-6 col-lg-10 card" data-postId={{id}}>
     <div class = "card-header bg-dark">
-      <h4 class="small">{{post.title}}</h4>
-      <h6>Posted by {{user.name}} on {{post.date_created}}</h6>
+      <h4 class="small">{{title}}</h4>
+      <h6>Posted by {{user.name}} on {{date_created}}</h6>
     </div>
-    <p class="card-body">{{post.text}}</p>
+    <p class="card-body">{{text}}</p>
   </div>
-  {{#each comment as |comment| }}
+  {{#each comments as |comment| }}
     <div class="col-md-6 col-lg-10 card" data-commentId={{comment.id}}>
     <div class = "card-header bg-dark">
     </div>
-    <p class="card-body">{{comment.text}}</p>
+    <p class="card-body">{{comment.text}} <br><br>-{{comment.user.name}} on {{comment.date_created}}</p>
   </div>
   {{/each}}
+  <div class="col-md-6 col-lg-10 card">
+    <div class = "card-header bg-dark"></div>
+    <div class="card-body display-block">
+        <label for="comment-text">Comment</label>
+        <textarea id='comment-text' class="card-textarea display-block w-100"></textarea>
+        <button class="btn btn-primary display-block w-100" id='add-comment'>Submit</button>
+    </div>    
+  </div>
 </div>
+<script src="/js/homepage.js"></script>
 

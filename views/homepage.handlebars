@@ -2,7 +2,7 @@
 <div class="row align-center mb-5">
   <div class="col-md-6 col-lg-10 card post" data-postId={{post.id}}>
     <div class = "card-header bg-dark">
-      <h4 class="small">{{post.title}}</h4>
+      <a href = '/comments/{{post.id}}'><h4 class="small">{{post.title}}</h4></a>
       <h6>Posted by {{user.name}} on {{post.date_created}}</h6>
     </div>
     <p class="card-body">{{post.text}}</p>
