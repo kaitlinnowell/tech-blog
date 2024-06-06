@@ -31,6 +31,9 @@ router.get('/', withAuth, async (req, res) => {
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
+      where: { 
+        user_id: req.session.user_id
+      },
       include: [
         {
           model: User,
@@ -46,7 +49,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     res.render('dashboard', {
       posts,
       current_user_id: req.session.user_id,
-      logged_in: req.session?.logged_in,
+      logged_in: req.session.logged_in,
       page_title: 'The Tech Blog'
     });
   } catch (err) {

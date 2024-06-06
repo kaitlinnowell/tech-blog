@@ -1,13 +1,40 @@
 {{#each posts as |post| }}
- {{#if post.user_id == {{current_user_id}}}}
-  <div class="row align-center mb-5">
+  <div class="row align-center mb-1">
     <div class="col-md-6 col-lg-10 card post" data-postId={{post.id}}>
       <div class = "card-header bg-dark">
-        <a href = '/comments/{{post.id}}'><h4 class="small">{{post.title}}</h4></a>
+        <a href = '/comments/{{post.id}}'><h4>{{post.title}}</h4></a>
         <h6>Posted by {{user.name}} on {{post.date_created}}</h6>
       </div>
       <p class="card-body">{{post.text}}</p>
     </div>
   </div>
- {{/if}}
 {{/each}}
+<button class="btn btn-primary display-block w-100" id='add-post'>+ New Post</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postModalLabel"><b>Create a blog post</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="postName" placeholder="Name of Post">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="postText" placeholder="Blog Text">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-post">Save Post</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -13,8 +13,7 @@ router.post('/add', async (req, res) => {
       if (!commentData) {
         return res.status(400).json({ message: 'Failed to create comment' });
       }
-      console.log(commentData.id)
-      res.json('Comment added!')
+      res.status(200).json('Comment added!')
       
     } catch (err) {
       console.log(err)
